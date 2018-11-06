@@ -104,10 +104,10 @@ public class Graphe {
 		
 		boolean not_end = true;
 		int r = 0;
-		List<Integer> S = new ArrayList<Integer>();
 		while (not_end)
 		{
 			not_end = false;
+			List<Integer> S = new ArrayList<Integer>();
 			for (int i = 0 ; i < nb_sommets ; ++i)
 			{
 				if (preds[i] == 0)
