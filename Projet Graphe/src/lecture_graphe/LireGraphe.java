@@ -12,6 +12,7 @@ public class LireGraphe {
 		
 		try {
 			Graphe g1 = new Graphe(args[0]);
+			System.out.println(g1);
 		}
 		catch (FileNotFoundException e)
 		{
