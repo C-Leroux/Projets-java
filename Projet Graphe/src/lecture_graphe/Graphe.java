@@ -2,8 +2,9 @@ package lecture_graphe;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Graphe {
 	
@@ -26,7 +27,6 @@ public class Graphe {
 			int dst = scan.nextInt();
 			int val = scan.nextInt();
 			ajoutArc(src, dst, val);
-			scan.nextLine();
 		}
 		
 		scan.close();
@@ -95,6 +95,58 @@ public class Graphe {
 			result += " ";
 		}
 		return result;
+	}
+	
+	public void rang()
+	{
+		int[] preds = get_preds();
+		int[] rangs = new int[nb_sommets];
+		
+		boolean not_end = true;
+		int r = 0;
+		List<Integer> S = new ArrayList<Integer>();
+		while (not_end)
+		{
+			not_end = false;
+			for (int i = 0 ; i < nb_sommets ; ++i)
+			{
+				if (preds[i] == 0)
+				{
+					not_end = true;
+					--preds[i];
+					rangs[i] = r;
+					S.add(i);
+				}
+			}
+			for (Integer i : S)
+			{
+				for (int j = 0 ; j < nb_sommets ; ++j)
+				{
+					if (adj[i][j])
+						--preds[j];
+				}
+			}
+			++r;
+		}
+		
+		// Affichage des rangs
+		for (int i = 0 ; i < nb_sommets ; ++i)
+			System.out.println("Range de " + i + " : " + rangs[i] + "\n");
+	}
+	
+	public int[] get_preds()
+	{
+		int[] preds = new int[nb_sommets];
+		for (int j = 0 ; j < nb_sommets ; ++j)
+		{
+			preds[j] = 0;
+			for (int i = 0 ; i < nb_sommets ; ++i)
+			{
+				if (adj[i][j])
+					++preds[j];
+			}
+		}
+		return preds;
 	}
 	
 	public String toString()
