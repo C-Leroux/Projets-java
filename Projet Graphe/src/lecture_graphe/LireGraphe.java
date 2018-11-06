@@ -1,22 +1,21 @@
 package lecture_graphe;
 
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class LireGraphe {
 
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) {
 		if (args.length != 1)
 		{
 			throw new IllegalArgumentException("Un seul argument attendu");
 		}
 		
-		Scanner scan = new Scanner(new File(args[0]));
-		
-		while (scan.hasNext())
+		try {
+			Graphe g1 = new Graphe(args[0]);
+		}
+		catch (FileNotFoundException e)
 		{
-			scan.nextLine();
+			System.out.print(e.getMessage());
 		}
 	}
 
