@@ -99,6 +99,8 @@ public class Graphe {
 	
 	public void rang()
 	{
+		System.out.println("* Calcul des rangs\n* Méthode d'élimination des points d'entrée\n");
+		
 		int[] preds = get_preds();
 		int[] rangs = new int[nb_sommets];
 		
@@ -118,20 +120,31 @@ public class Graphe {
 					S.add(i);
 				}
 			}
-			for (Integer i : S)
+			
+			if (not_end)
 			{
-				for (int j = 0 ; j < nb_sommets ; ++j)
+				System.out.println("Rang courant = " + r);
+				System.out.println("Points d'entrée :");
+				
+				for (Integer i : S)
 				{
-					if (adj[i][j])
-						--preds[j];
+					System.out.print(i + " ");
+					
+					for (int j = 0 ; j < nb_sommets ; ++j)
+					{
+						if (adj[i][j])
+							--preds[j];
+					}
 				}
+				
+				System.out.println("\n");
+				++r;
 			}
-			++r;
 		}
 		
 		// Affichage des rangs
 		for (int i = 0 ; i < nb_sommets ; ++i)
-			System.out.println("Range de " + i + " : " + rangs[i] + "\n");
+			System.out.println("Range de " + i + " : " + rangs[i]);
 	}
 	
 	public int[] get_preds()
