@@ -12,8 +12,9 @@ public class LireGraphe {
 		
 		try {
 			Graphe g1 = new Graphe(args[0]);
-			// System.out.println(g1); //Question 2
-			g1.rang(); //Question 4
+			System.out.println(g1); //Question 2
+			g1.circuit(); //Question 3
+			//g1.rang(); //Question 4
 		}
 		catch (FileNotFoundException e)
 		{

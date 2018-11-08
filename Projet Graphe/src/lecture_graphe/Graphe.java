@@ -8,11 +8,13 @@ import java.util.List;
 
 public class Graphe {
 	
-	private boolean[][] adj; // Matrice d'adjacence
-	private int[][] poids;   // Matrice de poids des arcs
-	private int nb_sommets;  // Nombre de sommets
-	private int nb_arcs;     // Nombre d'arcs
+	protected boolean[][] adj; // Matrice d'adjacence
+	protected int[][] poids;   // Matrice de poids des arcs
+	protected int nb_sommets;  // Nombre de sommets
+	protected int nb_arcs;     // Nombre d'arcs
 
+	public Graphe() {};
+	
 	public Graphe(String filename) throws FileNotFoundException {
 		Scanner scan = new Scanner(new File(filename));
 		
@@ -97,6 +99,16 @@ public class Graphe {
 		return result;
 	}
 	
+	public void circuit()
+	{
+        System.out.println("* Détection de circuit");
+        System.out.println("* Méthode d’élimination des points d’entrée");
+        
+        CopieGraphe mat = new CopieGraphe(this);
+        /*return*/ mat.is_circuit();
+	}
+	
+    
 	public void rang()
 	{
 		System.out.println("* Calcul des rangs");
@@ -168,6 +180,32 @@ public class Graphe {
 	{
 		return "* Représentation du graphe sous forme matricielle :\n"
 				+ afficherAdj() + "\n" + afficherPoids();
+	}
+	
+	public boolean[][] copieAdj()
+	{
+		boolean[][] mat = new boolean[nb_sommets][nb_sommets];
+		
+		for (int i = 0 ; i < nb_sommets ; ++i)
+		{
+			for (int j = 0 ; j < nb_sommets ; ++j)
+				mat[i][j] = adj[i][j];
+		}
+		
+		return mat;
+	}
+	
+	public int[][] copiePoids()
+	{
+		int[][] mat = new int[nb_sommets][nb_sommets];
+		
+		for (int i = 0 ; i < nb_sommets ; ++i)
+		{
+			for (int j = 0 ; j < nb_sommets ; ++j)
+				mat[i][j] = poids[i][j];
+		}
+		
+		return mat;
 	}
 	
 }
