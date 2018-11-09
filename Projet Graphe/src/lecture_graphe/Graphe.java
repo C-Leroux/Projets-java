@@ -2,6 +2,7 @@ package lecture_graphe;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
@@ -206,6 +207,30 @@ public class Graphe {
 		}
 		
 		return mat;
+	}
+	
+	public void calendrierTot ()
+	{
+		for (int i = 0 ; i < nb_sommets ; ++i)
+		{
+			int date = dateTot(i);
+			System.out.println("Sommet " + i + " : " + date);
+		}
+	}
+	
+	public int dateTot(int sommet)
+	{
+		ArrayList<Integer> S = new ArrayList<Integer>();
+		
+		for (int j = 0 ; j < nb_sommets ; ++j)
+		{
+			if (adj[sommet][j])
+				S.add(dateTot(j) + poids[j][sommet]);
+		}
+		
+		if (S.isEmpty())
+			return 0;
+		return Collections.min(S);
 	}
 	
 }
